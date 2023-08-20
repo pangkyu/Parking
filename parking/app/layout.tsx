@@ -1,27 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Noto_Sans_KR } from "next/font/google";
-import Header from "./_common/Header";
-
-const notoSansKR = Noto_Sans_KR({
-  subsets: ["latin"],
-  weight: ["100", "300", "400", "500", "700", "900"],
-  display: "swap",
-  fallback: [
-    "-apple-system",
-    "Malgun Gothic",
-    "Apple SD Gothic Neo",
-    "Roboto",
-    "Apple Color Emoji",
-    "Segoe UI Emoji",
-    "Segoe UI Symbol",
-    "sans-serif",
-  ],
-});
-
-export const cls = (...className: string[]) => {
-  return className.join(" ");
-};
+import Header from "../components/Header";
 
 export const metadata: Metadata = {
   title: "Parking",
@@ -34,9 +13,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={cls(notoSansKR.className)}>
-      <Header />
-      <body>{children}</body>
+    <html>
+      <body>
+        <Header />
+        <main>{children}</main>
+      </body>
     </html>
   );
 }
