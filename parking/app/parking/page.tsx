@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { parseString } from "xml2js";
 
 export default function parking() {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<any>(null);
   let parkingCount = 0;
 
   useEffect(() => {
@@ -30,37 +30,55 @@ export default function parking() {
     fetchData();
   }, []);
   console.log(data);
+
   if (data) {
     parkingCount = Number(data.GetParkingInfo.list_total_count[0]);
   }
 
   return (
-    <>
-      <table className="table-auto">
+    <main className="flex items-center justify-center">
+      <table className=" table-auto border-collapse border border-slate-400">
         <thead>
           <tr>
-            <th>주차장 이름</th>
-            <th>주차장 주소</th>
-            <th>주차장 형태</th>
-            <th>유/무료</th>
+            <th className="border border-slate-300">주차장 이름</th>
+            <th className="border border-slate-300">주소</th>
+            <th className="border border-slate-300">형태</th>
+            <th className="border border-slate-300">유/무료</th>
+            <th className="border border-slate-300">요금</th>
+
+            <th className="border border-slate-300">총 주차대수</th>
+            <th className="border border-slate-300">주차 가능대수</th>
           </tr>
         </thead>
         <tbody>
           {data
-            ? data.GetParkingInfo.row.map((item, index: number) => {
-                console.log(item);
+            ? data.GetParkingInfo.row.map((item: any, index: number) => {
                 return (
-                  <div key={index}>
-                    <th>{item.PARKING_NAME}</th>
-                    <th>{item.ADDR}</th>
-                    <th>{item.PARKING_TYPE_NM}</th>
-                    <th>{item.PAY_NM}</th>
-                  </div>
+                  <tr key={index}>
+                    <td className="border border-slate-300">
+                      {item.PARKING_NAME}
+                    </td>
+                    <td className="border border-slate-300">{item.ADDR}</td>
+                    <td className="border border-slate-300">
+                      {item.PARKING_TYPE_NM}
+                    </td>
+                    <td className="border border-slate-300">{item.PAY_NM}</td>
+                    <td className="border border-slate-300">
+                      {item.RATES}원, {item.TIME_RATE}분
+                    </td>
+
+                    <td className="border border-slate-300">
+                      {item.CAPACITY}대
+                    </td>
+                    <td className="border border-slate-300">
+                      {item.CAPACITY - item.CUR_PARKING}대
+                    </td>
+                  </tr>
                 );
               })
             : null}
         </tbody>
       </table>
-    </>
+    </main>
   );
 }
