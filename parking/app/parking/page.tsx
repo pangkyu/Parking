@@ -4,36 +4,51 @@ import React, { useState, useEffect } from "react";
 import { parseString } from "xml2js";
 
 export default function parking() {
-  const [data, setData] = useState<any>(null);
-  let parkingCount = 0;
+  const [data, setData] = useState<any[]>([]);
+  const [parkingLots, setParkingLots] = useState<number>(0);
+  const count = 1000;
 
   useEffect(() => {
     const fetchData = async () => {
+      let startIndex = 1;
+      let endIndex = 999;
+      let status = true;
       try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}0/999/`
-        );
-        if (response.ok) {
-          const responseData = await response.text();
-          parseString(responseData, (err, result) => {
-            if (err) {
-              console.error("ERROR Parsing XML : ", err);
-            } else {
-              setData(result);
-            }
-          });
-        }
+        do {
+          const response = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}${startIndex}/${endIndex}/`
+          );
+          status = response.ok;
+          if (response.ok) {
+            const responseData = await response.text();
+            parseString(responseData, (err, result) => {
+              if (err) {
+                console.error("ERROR Parsing XML : ", err);
+                return;
+              }
+              console.log("result", result);
+              if (result.GetParkingInfo.row[998].ADDR == "") {
+                status = false;
+              }
+              setParkingLots(Number(result.GetParkingInfo.list_total_count[0]));
+              setData((prevData: any) => [
+                ...prevData,
+                ...result.GetParkingInfo.row,
+              ]);
+            });
+          }
+          startIndex += count;
+          endIndex += count;
+        } while (status);
       } catch (err) {
         console.error("ERROR Fetching data: ", err);
       }
     };
+
     fetchData();
   }, []);
-  console.log(data);
 
-  if (data) {
-    parkingCount = Number(data.GetParkingInfo.list_total_count[0]);
-  }
+  console.log("data", data);
 
   return (
     <main className="flex items-center justify-center">
@@ -45,14 +60,13 @@ export default function parking() {
             <th className="border border-slate-300">형태</th>
             <th className="border border-slate-300">유/무료</th>
             <th className="border border-slate-300">요금</th>
-
             <th className="border border-slate-300">총 주차대수</th>
             <th className="border border-slate-300">주차 가능대수</th>
           </tr>
         </thead>
         <tbody>
           {data
-            ? data.GetParkingInfo.row.map((item: any, index: number) => {
+            ? data.map((item: any, index: number) => {
                 return (
                   <tr key={index}>
                     <td className="border border-slate-300">
