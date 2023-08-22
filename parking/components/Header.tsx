@@ -19,7 +19,9 @@ export default function Header() {
         </Link>
         <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
           <Link href="/parking" className="mr-5 hover:text-gray-900">
-            근처 주차장 찾기
+            <button className="bg-indigo-500 focus:outline-none text-white hover:bg-indigo-600 rounded w-[140px] h-[30px]">
+              주차장 찾기
+            </button>
           </Link>
         </nav>
       </div>
