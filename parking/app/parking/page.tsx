@@ -5,7 +5,7 @@ import { parseString } from "xml2js";
 
 export default function parking() {
   const [data, setData] = useState<any[]>([]);
-  const [parkingLots, setParkingLots] = useState<number>(0);
+  const [_, setParkingLots] = useState<number>(0);
   const count = 1000;
 
   useEffect(() => {
@@ -13,28 +13,26 @@ export default function parking() {
       let startIndex = 1;
       let endIndex = 999;
       let status = true;
+      let uniqueData: any[] = [];
+
       try {
         do {
           const response = await fetch(
             `${process.env.NEXT_PUBLIC_API_URL}${startIndex}/${endIndex}/`
           );
           status = response.ok;
-          if (response.ok) {
+          if (status) {
             const responseData = await response.text();
             parseString(responseData, (err, result) => {
               if (err) {
                 console.error("ERROR Parsing XML : ", err);
                 return;
               }
-              console.log("result", result);
               if (result.GetParkingInfo.row[998].ADDR == "") {
                 status = false;
               }
+              uniqueData = uniqueData.concat(result.GetParkingInfo.row);
               setParkingLots(Number(result.GetParkingInfo.list_total_count[0]));
-              setData((prevData: any) => [
-                ...prevData,
-                ...result.GetParkingInfo.row,
-              ]);
             });
           }
           startIndex += count;
@@ -43,6 +41,15 @@ export default function parking() {
       } catch (err) {
         console.error("ERROR Fetching data: ", err);
       }
+
+      const uniqueDataWithNoDuplicates = uniqueData.filter(
+        (item, index, self) =>
+          index ===
+          self.findIndex(
+            (innerItem) => innerItem.PARKING_CODE[0] === item.PARKING_CODE[0]
+          )
+      );
+      setData(uniqueDataWithNoDuplicates);
     };
 
     fetchData();
