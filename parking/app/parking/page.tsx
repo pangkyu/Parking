@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { parseString } from "xml2js";
 
-export default function parking() {
+export default function Parking() {
   const [data, setData] = useState<any[]>([]);
   const [_, setParkingLots] = useState<number>(0);
   const count = 1000;
@@ -55,6 +55,7 @@ export default function parking() {
     fetchData();
   }, []);
 
+  console.log(data);
   return (
     <main className="text-gray-600 body-font w-[100%] flex justify-center items-center">
       <div className=" flex text-center mx-auto">
