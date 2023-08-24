@@ -1,11 +1,24 @@
+"use client";
+
+import { useState } from "react";
+
 export default function ParkTest() {
+  const [test, setTest] = useState([]);
   const fetchData = async () => {
     const res = await fetch(
       "https://parking-good.vercel.app/parktest/api/dataList"
     );
     const data = await res.json();
-    console.log(data);
+    setTest(data);
   };
   fetchData();
-  return <p>111</p>;
+  return (
+    <>
+      {test
+        ? test.map((item: any, index: number) => {
+            return <p key={index}>{item.name}</p>;
+          })
+        : null}
+    </>
+  );
 }
