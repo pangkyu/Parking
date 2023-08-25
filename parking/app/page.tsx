@@ -28,11 +28,21 @@ export default function Home() {
         <div className="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4 md:space-y-0 space-y-6">
           <div className="p-4 md:w-1/3 w-[100%] flex flex-col text-center items-center">
             <div className="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-5 flex-shrink-0">
+              {/* <Image src={Marker} alt="marker" className="w-10 h-10" /> */}
+            </div>
+            <div className="flex-grow">
+              <h2 className="text-gray-900 text-lg title-font font-medium mb-3"></h2>
+              <p className="leading-relaxed text-[12px] sm:text-[16px] md:text-[16px] "></p>
+              <p className="leading-relaxed text-[12px] sm:text-[16px] md:text-[16px]"></p>
+            </div>
+          </div>
+          <div className="p-4 md:w-1/3 w-[100%] flex flex-col text-center items-center">
+            <div className="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-5 flex-shrink-0">
               <Image src={Marker} alt="marker" className="w-10 h-10" />
             </div>
             <div className="flex-grow">
               <h2 className="text-gray-900 text-lg title-font font-medium mb-3">
-                위치가 어딘지 지도에 표시해줍니다.
+                주차장 위치를 지도에 표시합니다.
               </h2>
               <p className="leading-relaxed text-[12px] sm:text-[16px] md:text-[16px] ">
                 현재 서울에 있는 203곳의 주차장 실시간 정보를 제공하고 있어요.
@@ -44,34 +54,12 @@ export default function Home() {
           </div>
           <div className="p-4 md:w-1/3 w-[100%] flex flex-col text-center items-center">
             <div className="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-5 flex-shrink-0">
-              <Image src={Marker} alt="marker" className="w-10 h-10" />
+              {/* <Image src={Marker} alt="marker" className="w-10 h-10" /> */}
             </div>
             <div className="flex-grow">
-              <h2 className="text-gray-900 text-lg title-font font-medium mb-3">
-                위치가 어딘지 지도에 표시해줍니다.
-              </h2>
-              <p className="leading-relaxed text-[12px] sm:text-[16px] md:text-[16px] ">
-                현재 서울에 있는 203곳의 주차장 실시간 정보를 제공하고 있어요.
-              </p>
-              <p className="leading-relaxed text-[12px] sm:text-[16px] md:text-[16px]">
-                전국 주차장으로 점점 확대해 나갈 계획을 갖고 있어요
-              </p>
-            </div>
-          </div>
-          <div className="p-4 md:w-1/3 w-[100%] flex flex-col text-center items-center">
-            <div className="w-20 h-20 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-5 flex-shrink-0">
-              <Image src={Marker} alt="marker" className="w-10 h-10" />
-            </div>
-            <div className="flex-grow">
-              <h2 className="text-gray-900 text-lg title-font font-medium mb-3">
-                위치가 어딘지 지도에 표시해줍니다.
-              </h2>
-              <p className="leading-relaxed text-[12px] sm:text-[16px] md:text-[16px] ">
-                현재 서울에 있는 203곳의 주차장 실시간 정보를 제공하고 있어요.
-              </p>
-              <p className="leading-relaxed text-[12px] sm:text-[16px] md:text-[16px]">
-                전국 주차장으로 점점 확대해 나갈 계획을 갖고 있어요
-              </p>
+              <h2 className="text-gray-900 text-lg title-font font-medium mb-3"></h2>
+              <p className="leading-relaxed text-[12px] sm:text-[16px] md:text-[16px] "></p>
+              <p className="leading-relaxed text-[12px] sm:text-[16px] md:text-[16px]"></p>
             </div>
           </div>
         </div>
