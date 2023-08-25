@@ -11,6 +11,7 @@ const notoSansKr = Noto_Sans_KR({
 export const metadata: Metadata = {
   title: "Parking",
   description: "주차 공간을 찾을 수 있게 도와줍니다.",
+  authors: [{ name: "pangkyu", url: "https://parking-good.vercel.app/" }],
 };
 
 export default function RootLayout({
@@ -19,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html className="notoSansKr.className">
+    <html>
       <body>
         <Header />
         <main>{children}</main>
