@@ -8,6 +8,10 @@ const nextConfig = {
         source: "/api/dataList",
         destination: `https://jsonplaceholder.typicode.com/users`,
       },
+      {
+        source: "/api/parkingList/:start/:end",
+        destination: `${process.env.NEXT_PUBLIC_API_URL}/:start/:end`,
+      },
     ];
   },
 };
