@@ -17,9 +17,6 @@ export default function Parking() {
 
       try {
         do {
-          // const response = await fetch(
-          //   `${process.env.NEXT_PUBLIC_API_URL}/${startIndex}/${endIndex}/`
-          // );
           const response = await fetch(
             `api/parkingList/${startIndex}/${endIndex}`
           );
