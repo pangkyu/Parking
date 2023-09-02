@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { parseString } from "xml2js";
+import GuList from "@/components/GuList";
 
 export default function Parking() {
   const [data, setData] = useState<any[]>([]);
@@ -12,8 +13,8 @@ export default function Parking() {
     const fetchData = async () => {
       let startIndex = 1;
       let endIndex = 999;
-      let status = true;
       let uniqueData: any[] = [];
+      let status = true;
 
       try {
         do {
@@ -55,10 +56,19 @@ export default function Parking() {
     fetchData();
   }, []);
 
-  console.log(data);
+  // console.log(data);
   return (
     <main className="text-gray-600 body-font w-[100%] flex justify-center items-center">
-      <div className=" flex text-center mx-auto">
+      <div className="flex flex-col text-center mx-auto">
+        <h1 className="flex mt-20 justify-center text-[20px] sm:text-2xl md:text-3xl font-medium title-font mb-4">
+          <p className="text-indigo-500">파킹 굿</p>
+          <p className="text-gray-900">에서 주차장을 찾아보세요!</p>
+        </h1>
+        <div className="flex justify-center">
+          <div className="flex flex-wrap justify-center items-center text-center lg:w-[50%]">
+            <GuList />
+          </div>
+        </div>
         <table className="table-auto border-collapse border border-slate-400 text-[8px] lg:text-[12px]">
           <thead>
             <tr>
