@@ -56,7 +56,7 @@ export default function Parking() {
     fetchData();
   }, []);
 
-  // console.log(data);
+  console.log(data);
   return (
     <main className="text-gray-600 body-font w-[100%] flex justify-center items-center">
       <div className="flex flex-col text-center mx-auto">
@@ -74,7 +74,6 @@ export default function Parking() {
             <tr>
               <th className="border border-slate-300">주차장 이름</th>
               <th className="border border-slate-300">주소</th>
-              {/* <th className="border border-slate-300">형태</th> */}
               <th className="border border-slate-300">유/무료</th>
               <th className="border border-slate-300">요금</th>
               <th className="border border-slate-300">총 주차대수</th>
@@ -85,19 +84,15 @@ export default function Parking() {
             {data
               ? data.map((item: any, index: number) => {
                   return (
-                    <tr key={index}>
+                    <tr key={index} className="h-[40px] cursor-pointer">
                       <td className="border border-slate-300">
                         {item.PARKING_NAME}
                       </td>
                       <td className="border border-slate-300">{item.ADDR}</td>
-                      {/* <td className="border border-slate-300">
-                          {item.PARKING_TYPE_NM}
-                        </td> */}
                       <td className="border border-slate-300">{item.PAY_NM}</td>
                       <td className="border border-slate-300">
                         {item.RATES}원, {item.TIME_RATE}분
                       </td>
-
                       <td className="border border-slate-300">
                         {item.CAPACITY}대
                       </td>
