@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { parseString } from "xml2js";
 import GuList from "@/components/GuList";
+import { useRouter } from "next/navigation";
 
 export default function Parking() {
   const [data, setData] = useState<any[]>([]);
@@ -56,6 +57,11 @@ export default function Parking() {
     fetchData();
   }, []);
 
+  const router = useRouter();
+  const handleRouting = (id: number) => {
+    router.push(`/parking/${id}`);
+  };
+
   console.log(data);
   return (
     <main className="text-gray-600 body-font w-[100%] flex justify-center items-center">
@@ -84,7 +90,11 @@ export default function Parking() {
             {data
               ? data.map((item: any, index: number) => {
                   return (
-                    <tr key={index} className="h-[40px] cursor-pointer">
+                    <tr
+                      key={index}
+                      className="h-[40px] cursor-pointer"
+                      onClick={() => handleRouting(index)}
+                    >
                       <td className="border border-slate-300">
                         {item.PARKING_NAME}
                       </td>
