@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { parseString } from "xml2js";
 import GuList from "@/components/GuList";
 import { useRouter } from "next/navigation";
+import detail from "./[id]/page";
 
 export default function Parking() {
   const [data, setData] = useState<any[]>([]);
@@ -58,11 +59,11 @@ export default function Parking() {
   }, []);
 
   const router = useRouter();
-  const handleRouting = (id: number) => {
-    router.push(`/parking/${id}`);
+  const handleRouting = (item: any) => {
+    router.push(`/parking/detail`);
+    detail(item);
   };
 
-  console.log(data);
   return (
     <main className="text-gray-600 body-font w-[100%] flex justify-center items-center">
       <div className="flex flex-col text-center mx-auto">
@@ -93,7 +94,7 @@ export default function Parking() {
                     <tr
                       key={index}
                       className="h-[40px] cursor-pointer"
-                      onClick={() => handleRouting(index)}
+                      onClick={() => handleRouting(item)}
                     >
                       <td className="border border-slate-300">
                         {item.PARKING_NAME}

@@ -1,30 +1,49 @@
 "use client";
 
-/**
- * @todo
- * 파킹 코드로 검색이 되는 줄 알았는데 안됩니다
- * 수정 필요 !
- */
+import { useEffect, useRef, useState } from "react";
 
-import { useParams } from "next/navigation";
+export default function detail(item: any) {
+  // console.log(item);
 
-export default function detail() {
-  const param = useParams();
-  console.log(param.id);
+  const mapElement = useRef(null);
+  const [myLocation, setMyLocation] = useState({});
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch(`api/parkingList/${param.id}/${param.id}`);
-      console.log(response.text());
-    } catch (err) {
-      console.error("Detail API ERROR : ", err);
+  useEffect(() => {
+    const { naver } = window;
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(success, error);
     }
-  };
-  fetchData();
+    if (!mapElement.current || !naver) return;
+
+    const location = new naver.maps.LatLng(37.5656, 126.9769);
+    const mapOptions = {
+      center: location,
+      zoom: 17,
+      zoomControl: true,
+    };
+    const map = new naver.maps.Map(mapElement.current, mapOptions);
+    new naver.maps.Marker({
+      position: location,
+      map,
+    });
+  }, []);
 
   return (
     <>
-      <p>디테일</p>
+      <p>naver map test</p>
+
+      <div ref={mapElement} style={{ minHeight: "400px" }}></div>
     </>
   );
+
+  function success(position: any) {
+    setMyLocation({
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude,
+    });
+  }
+
+  function error() {
+    setMyLocation({ latitude: 37.4979517, longitude: 127.0276188 });
+  }
 }
