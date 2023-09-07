@@ -4,10 +4,15 @@ import React, { useState, useEffect } from "react";
 import { parseString } from "xml2js";
 import GuList from "@/components/GuList";
 import { useRouter } from "next/navigation";
-import detail from "./[id]/page";
+import Detail from "./[id]/page";
+import IParking from "@/types/parking";
+
+/**
+ * @todo Detail 컴포넌트에 데이터 보내는 방법 변경필요~
+ */
 
 export default function Parking() {
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<IParking[]>([]);
   const [_, setParkingLots] = useState<number>(0);
   const count = 1000;
 
@@ -59,9 +64,9 @@ export default function Parking() {
   }, []);
 
   const router = useRouter();
-  const handleRouting = (item: any) => {
+  const handleRouting = (item: IParking) => {
     router.push(`/parking/detail`);
-    detail(item);
+    Detail(item);
   };
 
   return (
@@ -89,7 +94,7 @@ export default function Parking() {
           </thead>
           <tbody>
             {data
-              ? data.map((item: any, index: number) => {
+              ? data.map((item: IParking, index: number) => {
                   return (
                     <tr
                       key={index}
@@ -108,7 +113,7 @@ export default function Parking() {
                         {item.CAPACITY}대
                       </td>
                       <td className="border border-slate-300">
-                        {item.CAPACITY - item.CUR_PARKING}대
+                        {Number(item.CAPACITY) - Number(item.CUR_PARKING)}대
                       </td>
                     </tr>
                   );
