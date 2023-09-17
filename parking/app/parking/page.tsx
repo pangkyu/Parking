@@ -77,7 +77,7 @@ export default function Parking() {
           <p className="text-gray-900">에서 주차장을 찾아보세요!</p>
         </h1>
         <div className="flex justify-center">
-          <div className="flex flex-wrap justify-center items-center text-center lg:w-[50%]">
+          <div className="flex flex-wrap justify-center items-center text-center lg:w-[70%]">
             <GuList />
           </div>
         </div>
